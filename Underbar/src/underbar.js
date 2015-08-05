@@ -32,6 +32,8 @@ var _ = {};
    * implementing the sections you are responsible for.
    */
 
+// A note regarding the note above: no exercises were completed when I started work. --RB
+
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
   _.first = function(array, n) {
