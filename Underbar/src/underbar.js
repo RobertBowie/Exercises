@@ -100,8 +100,10 @@ var _ = {};
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    this.collection = collection;
+    this.test = test;
     var result = [];
-    _.each(collection, function(valueInArr){
+    _.each(collection, function(valueInArr, index, array){
       if(test(valueInArr)){
         result.push(valueInArr);
       }
@@ -113,12 +115,11 @@ var _ = {};
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    
+    return _.filter(collection, test); //trying to use !(test) yields TypeError: test is not a function: line 107
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
-    // your code here
   };
 
 
