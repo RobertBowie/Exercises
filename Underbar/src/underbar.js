@@ -138,25 +138,32 @@ var _ = {};
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
-
-    // your code here
+    var result = [];
+    if(Array.isArray(collection)){
+      for (var i = 0; i < collection.length; i++){
+        result.push(iterator(collection[i], i, collection));
+      }
+    } else /*object*/{
+      for(var key in collection){
+        result.push(iterator(collection[key], key, collection));
+      }
+    }
+    return result;
   };
 
   /*
    * TIP: map is really handy when you want to transform an array of
-   * values into a new array of values. _.pluck() is solved for you
-   * as an example of this.
+   * values into a new array of values.
    */
 
   // Takes an array of objects and returns and array of the values of
   // a certain property in it. E.g. take an array of people and return
   // an array of just their ages
   _.pluck = function(collection, key) {
-    // TIP: map is really handy when you want to transform an array of
-    // values into a new array of values. _.pluck() is solved for you
-    // as an example of this.
-    
-    // your code here
+    var obKey = key;
+    return _.map(collection, function(val, key, collection){
+      return val[obKey];
+    });
   };
 
   // Calls the method named by functionOrKey on each value in the list.
@@ -255,7 +262,7 @@ var _ = {};
     return function() {
       if (!alreadyCalled) {
         // TIP: .apply(this, arguments) is the standard way to pass on all of the
-        // infromation from one function call to another.
+        // information from one function call to another.
         result = func.apply(this, arguments);
         alreadyCalled = true;
       }
