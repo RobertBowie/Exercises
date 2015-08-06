@@ -84,7 +84,7 @@ var _ = {};
     }
   };
 
-  // Returns the index at which value can be found in the array, or -1 if value
+  // Returns the first index at which target can be found in the array, or -1 if value
   // is not present in the array. (You should use each() here!)
   _.indexOf = function(array, target){
     var result = -1;
@@ -113,17 +113,23 @@ var _ = {};
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    return _.filter(collection, function(item){
+    return _.filter(collection, function(item, index, array){
       return !(test(item));
     });
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
-    var exists
-    return _.filter(array, function(item){
-
-    });
+    var result = [];
+    var addToResult = function(){
+      _.each(array, function(value, key, collection){
+        if(_.indexOf(result, value) === -1){
+          result.push(value);
+        }
+      });
+    };
+    _.each(array, addToResult);
+    return result;
   };
 
 
