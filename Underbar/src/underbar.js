@@ -160,14 +160,13 @@ var _ = {};
   // a certain property in it. E.g. take an array of people and return
   // an array of just their ages
   _.pluck = function(collection, key) {
-    var obKey = key;
-    return _.map(collection, function(val, key, collection){
-      return val[obKey];
+    return _.map(collection, function(val, innerKey, innerCollection){
+      return val[key];
     });
   };
 
   // Calls the method named by functionOrKey on each value in the list.
-  // Note: you will nead to learn a bit about .apply to complete this.
+  // Note: you will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey) {
     // your code here
   };
