@@ -168,11 +168,15 @@ var _ = {};
   // Calls the method named by functionOrKey on each value in the list.
   // Note: you will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey) {
-    var result = [];
-    for(var i = 0; i < collection.length; i++){
-      result.push(functionOrKey.apply(collection[i], null));
+    if(typeof(functionOrKey) === "function"){
+        return _.map(collection, function(val, key, collection){
+          return functionOrKey.apply(val, null);
+        });
+    } else if(typeof(functionOrKey) === "string"){
+      return _.map(collection, function(val, key, collection){
+        return val[functionOrKey]();
+      });
     }
-    return result;
   };
 
   // Reduces an array or object to a single value by repetitively calling
