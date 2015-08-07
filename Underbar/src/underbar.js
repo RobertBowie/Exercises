@@ -194,7 +194,7 @@ var _ = {};
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
     var currentVal, lastVal;
-    if(arguments.length === 3){
+    if(arguments.length >= 3){
       lastVal = accumulator;
     } else {
       lastVal = collection[0];
@@ -210,8 +210,14 @@ var _ = {};
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
-    // terms of reduce(). Here's a freebie to demonstrate!
-    // your code here
+    // terms of reduce().
+    return _.reduce(collection, function(lastVal, currentVal){
+      if(lastVal === true){
+        return true;
+      } else {
+        return (currentVal === target);
+      }
+    }, false);
   };
 
 
