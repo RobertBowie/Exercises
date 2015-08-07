@@ -174,7 +174,7 @@ var _ = {};
         });
     } else if(typeof(functionOrKey) === "string"){
       return _.map(collection, function(val, key, collection){
-        return val[functionOrKey]();
+        return val[functionOrKey].apply(val, null);
       });
     }
   };
