@@ -212,7 +212,7 @@ var _ = {};
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce().
     return _.reduce(collection, function(lastVal, currentVal){
-      if(lastVal === true){
+      if(lastVal){
         return true;
       } else {
         return (currentVal === target);
@@ -224,7 +224,16 @@ var _ = {};
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
-    // your code here
+    if(collection.length === 0){
+      return true;
+    }
+    if(!iterator){
+      iterator = _.identity;
+    }
+    //the above is a way to handle empty collections
+    return _.reduce(collection, function(lastVal, currentVal){
+        return (!!iterator(currentVal) && lastVal);
+      }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
