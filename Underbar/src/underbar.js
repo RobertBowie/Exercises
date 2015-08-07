@@ -193,7 +193,17 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
-    // your code here
+    var currentVal, lastVal;
+    if(arguments.length === 3){
+      lastVal = accumulator;
+    } else {
+      lastVal = collection[0];
+    }
+    _.each(collection, function(val, index, arr){
+      currentVal = iterator(lastVal, val);
+      lastVal = currentVal;
+    });
+    return currentVal;
   };
 
 
