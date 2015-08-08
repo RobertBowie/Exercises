@@ -240,7 +240,15 @@ var _ = {};
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
-    // your code here
+    if(collection.length === 0){
+      return false;
+    }
+    if(!iterator){
+      iterator = _.identity;
+    }
+    return _.reduce(collection, function(lastVal, currentVal){
+        return (!!iterator(currentVal) || lastVal);
+      }, false);
   };
 
 
