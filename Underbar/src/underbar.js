@@ -288,7 +288,24 @@ var _ = {};
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
-
+    var objToExtend = obj;
+    var additionalArgObjects = [];
+    var tOrF = [];
+    for(var i = 1; i <= arguments.length - 1; i++){
+      additionalArgObjects.push(arguments[i]);
+    }
+    _.each(additionalArgObjects, function(val, key, collection){
+      for(var i in val){
+        var keyString = i.toString();
+        for(var k in objToExtend){
+          tOrF.push(k === i);
+        }
+      }
+      if(!(_.contains(tOrF, true))){
+        objToExtend[keyString] = val[keyString];
+      }
+    });
+    return objToExtend;
   };
 
 
