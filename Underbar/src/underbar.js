@@ -271,12 +271,24 @@ var _ = {};
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
-    // your code here
+    var objToExtend = obj;
+    var additionalArgObjects = [];
+    for(var i = 1; i <= arguments.length - 1; i++){
+      additionalArgObjects.push(arguments[i]);
+    }
+    _.each(additionalArgObjects, function(val, key, collection){
+      for(var i in val){
+        var keyString = i.toString();
+        objToExtend[keyString] = val[keyString];
+      }
+    });
+    return objToExtend;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+
   };
 
 
@@ -341,6 +353,7 @@ var _ = {};
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    
   };
 
 
