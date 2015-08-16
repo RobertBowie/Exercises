@@ -388,7 +388,17 @@ var _ = {};
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
-    
+    var aCopy = array.slice();
+    var result = [];
+    //first pick a random element of aCopy
+    //result.push(saidRandomElement) also remove from aCopy
+    //continue until no elements in aCopy are left.
+    for(var i = aCopy.length; i > 0; i--){
+      var randIndex = Math.floor(Math.random() * aCopy.length);
+      result.push(aCopy[randIndex]);
+      aCopy.splice(randIndex, 1);
+    }
+    return result;
   };
 
 
